@@ -132,13 +132,13 @@ class parser:
         map object that contains the html loaded from the response
         """
         if key not in XPath.xPaths:
-            return None
+            return []
 
         xpath = XPath.xPaths[key]
         node = map.xpath(xpath)
 
         if not node:
-            return None
+            return []
 
         if not is_list:
             return node[0].strip()
