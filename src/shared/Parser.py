@@ -56,8 +56,8 @@ class parser:
         app_data['Developer'] = self.extract_node_text(html_map, 'Developer')
         app_data['IsTopDeveloper'] = self.extract_node_text(html_map, 'IsTopDeveloper') is not None
         app_data['DeveloperURL'] = self.extract_node_text(html_map, 'DeveloperURL')
-        app_data['Description'] = "\n".join(self.extract_node_text(html_map, 'Description', True))
-        app_data['WhatsNew'] = "\n".join(self.extract_node_text(html_map, 'WhatsNew', True))
+        app_data['Description'] = "\n".join(self.extract_node_text(html_map, 'Description', True) or '')
+        app_data['WhatsNew'] = "\n".join(self.extract_node_text(html_map, 'WhatsNew', True) or '')
         app_data['HaveInAppPurchases'] = self.extract_node_text(html_map, 'HaveInAppPurchases') is not None
         app_data['LastUpdateDate'] = self.extract_node_text(html_map, 'LastUpdateDate')
         app_data['CurrentVersion'] = self.extract_node_text(html_map, 'CurrentVersion')
@@ -132,13 +132,13 @@ class parser:
         map object that contains the html loaded from the response
         """
         if key not in XPath.xPaths:
-            return []
+            return None
 
         xpath = XPath.xPaths[key]
         node = map.xpath(xpath)
 
         if not node:
-            return []
+            return None
 
         if not is_list:
             return node[0].strip()
