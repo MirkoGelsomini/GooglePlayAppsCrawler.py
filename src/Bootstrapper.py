@@ -10,7 +10,7 @@ from shared.Utils import Utils
 from shared.Utils import HTTPUtils
 
 class Bootstrapper:
-
+    _proxies = None
     def __init__(self):
         """
         Class Constructor : Initializes MongoDB
@@ -18,13 +18,13 @@ class Bootstrapper:
         """
 
         params = {}
-        params['server'] = 'mobiledata.bigdatacorp.com.br'
-        params['port'] = '21766'
-        params['database'] = 'MobileAppsData'
-        params['username'] = 'GitHubCrawlerUser'
-        params['password'] = 'g22LrJvULU5B'
-        params['seed_collection'] = 'PlayStore_QueuedApps_2015_05_PY'
-        params['auth_database'] = 'MobileAppsData'
+        params['server'] = '127.0.0.1'
+        params['port'] = '27017'
+        params['database'] = 'test'
+        params['username'] = 'superuser'
+        params['password'] = '12345678'
+        params['seed_collection'] = 'PlayStore_QueuedApps_2015_09_PY'
+        params['auth_database'] = 'admin'
         params['write_concern'] = True
         self._params = params
 
@@ -39,7 +39,7 @@ class Bootstrapper:
                                                      Store Crawler')
 
         parser.add_argument('bootstrapping-terms',
-                            type=file,
+                            type=open,
                             help='Path to the xml containing the bootstrapping\
                                    terms that should be loaded')
 
@@ -76,7 +76,7 @@ class Bootstrapper:
                                  hook and debug HTTPS Requests')
 
         parser.add_argument('--proxies-path',
-                            type=file,
+                            type=open,
                             default=None,
                             help='Path to the file of proxies \
                             (read the documentation)')
@@ -177,7 +177,7 @@ class Bootstrapper:
                 response = requests.get(category_url,
                                         HTTPUtils.headers,
                                         verify=self._verify_certificate,
-                                        proxies=Utils.get_proxy())
+                                        proxies=Utils.get_proxy(Bootstrapper))
 
                 if response.status_code != requests.codes.ok:
                     http_errors+=1
@@ -192,7 +192,7 @@ class Bootstrapper:
                     break # Response worked
 
             except requests.exceptions.SSLError as error:
-                print 'SSL_Error : ' + error.errno
+                print('SSL_Error : ' + error.errno)
 
         # Paging through results
         base_skip = 60
@@ -224,7 +224,7 @@ class Bootstrapper:
                         #Utils.sleep()
 
             except requests.exceptions.SSLError as error:
-                print 'SSL_Error : ' + error.errno
+                print('SSL_Error : ' + error.errno)
 
             current_multiplier+=1
 
@@ -270,7 +270,7 @@ class Bootstrapper:
                     break # Response worked
 
             except requests.exceptions.SSLError as error:
-                print 'SSL_Error : ' + error.errno
+                print('SSL_Error : ' + error.errno)
 
         # Paging Through Results
         while http_errors <= self._args['max_errors']:
@@ -306,7 +306,7 @@ class Bootstrapper:
                         #Utils.sleep()
 
             except requests.exceptions.SSLError as error:
-                print 'SSL_Error : ' + error.errno
+                print('SSL_Error : ' + error.errno)
 
     def start_bootstrapping(self):
         """
@@ -334,7 +334,7 @@ class Bootstrapper:
         # Checking for proxies
         if self._args['proxies_path']:
             self._proxies = Utils.load_proxies(self._args)
-            print 'Loaded Proxies : %d' % len(self._proxies)
+            print('Loaded Proxies : %d' % len(self._proxies))
         else:
             self._proxies = None
 

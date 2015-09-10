@@ -91,7 +91,7 @@ class MongoDBWrapper:
             self._database = self._client[database]
 
             # Reaching collection names to check whether the received exists
-            print 'Database Status : %s' % self._database.last_status()
+            print('Database Status : %s' % self._database.last_status())
 
             if collection:
                 self._collection = self._database[collection]
@@ -99,7 +99,7 @@ class MongoDBWrapper:
             return True
 
         except errors.OperationFailure as e:
-            print 'Error Code : %s - Details: %s' % (e.code, e.details)
+            print('Error Code : %s - Details: %s' % (e.code, e.details))
 
         return False
 
@@ -220,20 +220,20 @@ class MongoDBWrapper:
 
 if __name__ == '__main__':
 
-    print 'Connecting to the database'
+    print('Connecting to the database')
 
     # Dictionary of Connection Parameters
     params = {}
-    params['server'] = 'mobiledata.bigdatacorp.com.br'
-    params['port'] = '21766'
-    params['database'] = 'MobileAppsData'
-    params['username'] = 'GitHubCrawlerUser'
-    params['password'] = 'g22LrJvULU5B'
+    params['server'] = '127.0.0.1'
+    params['port'] = '27017'
+    params['database'] = 'test'
+    params['username'] = 'play'
+    params['password'] = 'play'
     params['seed_collection'] = 'Python_test'
-    params['auth_database'] = 'MobileAppsData'
+    params['auth_database'] = 'test'
     params['write_concern'] = True
 
-    mongo_uri = MongoDBWrapper.build_mongo_uri(params)
+    mongo_uri = MongoDBWrapper.build_mongo_uri(**params)
 
     mongo_wrapper = MongoDBWrapper()
     is_connected = mongo_wrapper.connect(mongo_uri, params['database'],

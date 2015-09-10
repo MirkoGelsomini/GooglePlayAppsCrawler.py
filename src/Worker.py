@@ -16,14 +16,14 @@ class Worker:
         """
 
         params = {}
-        params['server'] = 'mobiledata.bigdatacorp.com.br'
-        params['port'] = '21766'
-        params['database'] = 'MobileAppsData'
-        params['username'] = 'GitHubCrawlerUser'
-        params['password'] = 'g22LrJvULU5B'
+        params['server'] = '127.0.0.1'
+        params['port'] = '27017'
+        params['database'] = 'test'
+        params['username'] = 'superuser'
+        params['password'] = '12345678'
         params['seed_collection'] = 'PlayStore_QueuedApps_2015_05_PY'
         params['apps_collection'] = 'PlayStore_2015_08_PY'
-        params['auth_database'] = 'MobileAppsData'
+        params['auth_database'] = 'admin'
         params['write_concern'] = True
         self._params = params
 
@@ -70,7 +70,7 @@ class Worker:
                                  hook and debug HTTPS Requests')
 
         parser.add_argument('--proxies-path',
-                            type=file,
+                            type=open,
                             default=None,
                             help='Path to the file of proxies \
                             (read the documentation)')

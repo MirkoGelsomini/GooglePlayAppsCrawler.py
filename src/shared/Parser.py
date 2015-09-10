@@ -124,7 +124,7 @@ class parser:
         nodes = html_map.xpath(xpath)
 
         # Appending url prefix to the actual url found within the html
-        return map((lambda url: '{0}{1}'.format('https://play.google.com', url)), nodes)
+        return list(map((lambda url: '{0}{1}'.format('https://play.google.com', url)), nodes))
 
     def extract_node_text(self, map, key, is_list=False):
         """

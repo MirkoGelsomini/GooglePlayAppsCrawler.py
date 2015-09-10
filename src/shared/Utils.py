@@ -1,7 +1,7 @@
 import logging
 import random
 import time
-from MongoWrapper import MongoDBWrapper
+from .MongoWrapper import MongoDBWrapper
 
 class Utils:
     """
