@@ -104,7 +104,7 @@ class parser:
 
         # 3 - Reviewers
         tmp_value = self.extract_node_text(html_map, 'Reviewers', True)
-        tmp_value = tmp_value[1].replace('(', '').replace(')', '').replace(',','').replace('.', '')
+        tmp_value = (tmp_value or ['0', '0'])[1].replace('(', '').replace(')', '').replace(',','').replace('.', '')
         app_data['Reviewers'] = int(tmp_value)
 
         # 4 - Developer Urls (Privacy, Email and Website)
