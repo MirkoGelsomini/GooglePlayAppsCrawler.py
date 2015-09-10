@@ -207,7 +207,7 @@ class Bootstrapper:
                                          data = post_data,
                                          headers=HTTPUtils.headers,
                                          verify=self._verify_certificate,
-                                         proxies=Utils.get_proxy())
+                                         proxies=Utils.get_proxy(Bootstrapper))
 
                 if response.status_code != requests.codes.ok:
                     http_errors+=1
@@ -255,7 +255,7 @@ class Bootstrapper:
                                         data=post_data,
                                         headers=HTTPUtils.headers,
                                         verify=self._verify_certificate,
-                                        proxies=Utils.get_proxy())
+                                        proxies=Utils.get_proxy(Bootstrapper))
 
                 if response.status_code != requests.codes.ok:
                     http_errors+=1
@@ -289,7 +289,7 @@ class Bootstrapper:
                                          data=post_data,
                                          headers=HTTPUtils.headers,
                                          verify=self._verify_certificate,
-                                         proxies=Utils.get_proxy())
+                                         proxies=Utils.get_proxy(Bootstrapper))
 
                 if response.status_code != requests.codes.ok:
                     http_errors+=1
