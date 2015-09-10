@@ -21,8 +21,8 @@ class Worker:
         params['database'] = 'test'
         params['username'] = 'superuser'
         params['password'] = '12345678'
-        params['seed_collection'] = 'PlayStore_QueuedApps_2015_05_PY'
-        params['apps_collection'] = 'PlayStore_2015_08_PY'
+        params['seed_collection'] = 'PlayStore_QueuedApps_2015_09_PY'
+        params['apps_collection'] = 'PlayStore_2015_09_PY'
         params['auth_database'] = 'admin'
         params['write_concern'] = True
         self._params = params
